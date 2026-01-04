@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金文数据库</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 登录界面 -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <h2>金文数据库</h2>
+            <p class="login-subtitle">请输入访问密码</p>
+            <div class="login-form">
+                <input type="password" id="passwordInput" class="login-input" placeholder="请输入密码" autocomplete="off">
+                <button id="loginBtn" class="btn btn-primary btn-full">登录</button>
+                <p id="loginError" class="login-error hidden">密码错误，请重试</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主界面（登录成功后显示） -->
+    <div id="mainContainer" class="container hidden">
+        <header>
+            <h1>金文数据库</h1>
+            <p class="subtitle">中国古代青铜器铭文数据库</p>
+        </header>
+
+        <div class="toggle-filters">
+            <button id="toggleFiltersBtn" class="btn btn-primary">
+                <span id="toggleIcon">▼</span> 高级分类检索
+            </button>
+        </div>
+
+        <div id="advancedFilters" class="advanced-filters">
+            <div class="filter-mode-hint">
+                <strong>提示：</strong>每个筛选框都支持多关键词，用空格或逗号分隔。AND模式要求字段同时包含所有关键词。
+            </div>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>编号</label>
+                    <input type="text" id="filter编号" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>器名</label>
+                    <input type="text" id="filter器名" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>时代</label>
+                    <input type="text" id="filter时代" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>出土</label>
+                    <input type="text" id="filter出土" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>收藏</label>
+                    <input type="text" id="filter收藏" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>尺寸</label>
+                    <input type="text" id="filter尺寸" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>器形</label>
+                    <input type="text" id="filter器形" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>字数</label>
+                    <input type="text" id="filter字数" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>著录</label>
+                    <input type="text" id="filter著录" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>其他著录</label>
+                    <input type="text" id="filter其他著录" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>铭文</label>
+                    <input type="text" id="filter铭文" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>备注</label>
+                    <input type="text" id="filter备注" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>直接来源</label>
+                    <input type="text" id="filter直接来源" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>考古</label>
+                    <input type="text" id="filter考古" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+                <div class="filter-group">
+                    <label>其他</label>
+                    <input type="text" id="filter其他" class="filter-input" placeholder="支持多关键词或正则">
+                </div>
+            </div>
+
+            <div class="filter-row filter-mode-row">
+                <div class="filter-group">
+                    <label>筛选模式</label>
+                    <select id="filterModeSelect" class="filter-input">
+                        <option value="or">OR（满足任意关键词）</option>
+                        <option value="and">AND（同时包含所有关键词）</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button id="applyFiltersBtn" class="btn btn-primary">应用筛选</button>
+                <button id="resetFiltersBtn" class="btn btn-secondary">重置所有</button>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-mode-selector">
+                <label class="mode-label">搜索模式：</label>
+                <label class="mode-option">
+                    <input type="radio" name="searchMode" value="or" checked>
+                    <span>OR（满足任意关键词）</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="searchMode" value="and">
+                    <span>AND（同时包含所有关键词）</span>
+                </label>
+            </div>
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="全局搜索（支持多关键词，如：商 鼎 铭文）..."
+                    class="search-input"
+                >
+                <button id="searchBtn" class="btn btn-primary">搜索</button>
+                <button id="resetBtn" class="btn btn-secondary">重置</button>
+            </div>
+            <div class="regex-hint">
+                <strong>OR模式：</strong>用空格/逗号分隔关键词（如：商 鼎），匹配包含"商"或"鼎"的记录<br>
+                <strong>AND模式：</strong>用空格/逗号分隔关键词（如：商 鼎），匹配同时包含"商"和"鼎"的记录<br>
+                <strong>正则表达式：</strong>用 / 包裹正则表达式（如：/^商.*鼎$/）进行高级匹配
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">总记录数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="currentPage">1</div>
+                <div class="stat-label">当前页</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPages">1</div>
+                <div class="stat-label">总页数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="filteredCount">0</div>
+                <div class="stat-label">筛选结果</div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">加载中...</div>
+
+        <div id="error" class="error hidden"></div>
+
+        <div id="results" class="results-section">
+            <div id="artifactList" class="artifact-list"></div>
+        </div>
+
+        <div id="pagination" class="pagination"></div>
+
+        <div id="detailModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script_login.js"></script>
+</body>
+</html>

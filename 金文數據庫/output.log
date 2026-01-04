@@ -1,0 +1,25 @@
+正在读取Excel数据...
+读取到 18248 条记录
+选择了 14 个字段
+正在导入数据库...
+Traceback (most recent call last):
+  File "d:\金文數據庫\import_data.py", line 23, in <module>
+    df_selected.to_sql('金文数据', conn, if_exists='append', index=False)
+  File "C:\Users\竣\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\竣\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "C:\Users\竣\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\竣\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\sql.py", line 2439, in to_sql
+    return table.insert(chunksize, method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\竣\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\竣\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\sql.py", line 2135, in _execute_insert
+    conn.executemany(self.insert_statement(num_rows=1), data_list)
+sqlite3.IntegrityError: UNIQUE constraint failed: 金文数据.編号

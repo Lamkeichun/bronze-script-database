@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金文数据库</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>金文数据库</h1>
+            <p class="subtitle">中国古代青铜器铭文数据库</p>
+        </header>
+
+        <div class="toggle-filters">
+            <button id="toggleFiltersBtn" class="btn btn-primary">
+                <span id="toggleIcon">▼</span> 高级分类检索
+            </button>
+        </div>
+
+        <div id="advancedFilters" class="advanced-filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>编号</label>
+                    <input type="text" id="filter编号" class="filter-input" placeholder="输入编号">
+                </div>
+                <div class="filter-group">
+                    <label>器名</label>
+                    <input type="text" id="filter器名" class="filter-input" placeholder="输入器名">
+                </div>
+                <div class="filter-group">
+                    <label>时代</label>
+                    <input type="text" id="filter时代" class="filter-input" placeholder="输入时代">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>出土</label>
+                    <input type="text" id="filter出土" class="filter-input" placeholder="输入出土信息">
+                </div>
+                <div class="filter-group">
+                    <label>收藏</label>
+                    <input type="text" id="filter收藏" class="filter-input" placeholder="输入收藏机构">
+                </div>
+                <div class="filter-group">
+                    <label>尺寸</label>
+                    <input type="text" id="filter尺寸" class="filter-input" placeholder="输入尺寸">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>器形</label>
+                    <input type="text" id="filter器形" class="filter-input" placeholder="输入器形">
+                </div>
+                <div class="filter-group">
+                    <label>字数</label>
+                    <input type="text" id="filter字数" class="filter-input" placeholder="输入字数">
+                </div>
+                <div class="filter-group">
+                    <label>著录</label>
+                    <input type="text" id="filter著录" class="filter-input" placeholder="输入著录">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>其他著录</label>
+                    <input type="text" id="filter其他著录" class="filter-input" placeholder="输入其他著录">
+                </div>
+                <div class="filter-group">
+                    <label>铭文</label>
+                    <input type="text" id="filter铭文" class="filter-input" placeholder="输入铭文内容">
+                </div>
+                <div class="filter-group">
+                    <label>备注</label>
+                    <input type="text" id="filter备注" class="filter-input" placeholder="输入备注">
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button id="applyFiltersBtn" class="btn btn-primary">应用筛选</button>
+                <button id="resetFiltersBtn" class="btn btn-secondary">重置所有</button>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="全局搜索..."
+                    class="search-input"
+                >
+                <button id="searchBtn" class="btn btn-primary">搜索</button>
+                <button id="resetBtn" class="btn btn-secondary">重置</button>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">总记录数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="currentPage">1</div>
+                <div class="stat-label">当前页</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPages">1</div>
+                <div class="stat-label">总页数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="filteredCount">0</div>
+                <div class="stat-label">筛选结果</div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">加载中...</div>
+
+        <div id="error" class="error hidden"></div>
+
+        <div id="results" class="results-section">
+            <div id="artifactList" class="artifact-list"></div>
+        </div>
+
+        <div id="pagination" class="pagination"></div>
+
+        <div id="detailModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
